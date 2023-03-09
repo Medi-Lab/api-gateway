@@ -1,0 +1,6 @@
+export * from './specialization.service.interface'
+export * from './recommendation.service.interface'
+export * from './work-time.service.interface'
+export * from './rate.service.interface'
+export * from './doctor.service.interface'
+export * from './consultation.service.interface'

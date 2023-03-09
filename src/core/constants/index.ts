@@ -1,0 +1,37 @@
+export const constants = {
+    microservices_names: {
+        auth: "AUTH",
+        clinic: "CLINIC",
+        doctor: "DOCTOR",
+        record: "RECORD",
+        response: "RESPONSE",
+        user: "USER"
+    },
+    microservices_queues: {
+        auth: "auth",
+        clinic: "clinic",
+        doctor: "doctor",
+        record: "record",
+        response: "response",
+        user: "user",
+    },
+    tokens: {
+        USER_SERVICE_TOKEN: 'USER_SERVICE_TOKEN',
+        ROLE_SERVICE_TOKEN: 'ROLE_SERVICE_TOKEN',
+        USER_ROLE_SERVICE_TOKEN: 'USER_ROLE_SERVICE_TOKEN',
+        RESPONSE_SERVICE_TOKEN: 'RESPONSE_SERVICE_TOKEN',
+        REACTION_TO_RESPONSE_SERVICE_TOKEN: 'REACTION_TO_RESPONSE_SERVICE_TOKEN',
+        RECORD_SERVICE_TOKEN: 'RECORD_SERVICE_TOKEN',
+        DOCTOR_SERVICE_TOKEN: 'DOCTOR_SERVICE_TOKEN',
+        RECOMMENDATION_SERVICE_TOKEN: 'RECOMMENDATION_SERVICE_TOKEN',
+        CONSULTATION_SERVICE_TOKEN: 'CONSULTATION_SERVICE_TOKEN',
+        RATE_SERVICE_TOKEN: 'RATE_SERVICE_TOKEN',
+        SPECIALIZATION_SERVICE_TOKEN: 'SPECIALIZATION_SERVICE_TOKEN',
+        WORK_TIME_SERVICE_TOKEN: 'WORK_TIME_SERVICE_TOKEN',
+        CLINIC_SERVICE_TOKEN: 'CLINIC_SERVICE_TOKEN',
+        AUTH_SERVICE_TOKEN: 'AUTH_SERVICE_TOKEN',
+        ADMIN_SERVICE_TOKEN: 'ADMIN_SERVICE_TOKEN',
+        BLOCKING_SERVICE_TOKEN: 'BLOCKING_SERVICE_TOKEN',
+        JOIN_REQUEST_SERVICE_TOKEN: 'JOIN_REQUEST_SERVICE_TOKEN',
+    }
+}

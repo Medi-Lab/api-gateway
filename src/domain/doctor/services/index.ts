@@ -1,0 +1,6 @@
+export * from './work-time.service'
+export * from './consultation.service'
+export * from './doctor.service'
+export * from './recommendation.service'
+export * from './rate.service'
+export * from './specialization.service'

@@ -1,0 +1,6 @@
+export * from './consultation.controller'
+export * from './work-time.controller'
+export * from './doctor.controller'
+export * from './recommendation.controller'
+export * from './rate.controller'
+export * from './specialization.controller'
