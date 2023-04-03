@@ -14,3 +14,32 @@ export function registerMicroservices(microservicesNames: string[]): ClientsModu
         }
     }))
 }
+
+export const formOrderBy = (orderItem) => {
+    const [isDirectionOrItem, item] = orderItem.split('-');
+    if (isDirectionOrItem === '') {
+        return {
+            [item]: 'desc'
+        }
+    }
+    return {
+        [isDirectionOrItem]: 'asc'
+    }
+}
+
+export const transformToArray = (someStringArray) => {
+    return someStringArray
+        .slice(1, someStringArray.length - 1)
+        .replaceAll(' ', '')
+        .split(',');
+}
+
+export const convertToObjectWithNumbers = (object) => {
+    const resultObject = {};
+    let parsedFields = Object.entries(object);
+
+    parsedFields.forEach(item =>
+        resultObject[item[0]] = isNaN(Number(item[1])) ? item[1] : Number(item[1])
+    );
+    return resultObject;
+}

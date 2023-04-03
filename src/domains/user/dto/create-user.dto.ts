@@ -1,5 +1,5 @@
 import {ApiProperty} from "@nestjs/swagger";
-import {IsBoolean, IsEmail, IsNotEmpty, IsOptional, IsPhoneNumber, IsString} from "class-validator";
+import {IsBoolean, IsEmail, IsISO8601, IsNotEmpty, IsOptional, IsPhoneNumber, IsString} from "class-validator";
 
 export class CreateUserDto {
     @ApiProperty({example: "Мирослав", description: "Ім'я користувача"})
@@ -21,8 +21,8 @@ export class CreateUserDto {
 
     @ApiProperty({example: "15-09-2006", description: "Дата дня народження користувача"})
     @IsNotEmpty()
-    @IsString()
-    birthday: string;
+    @IsISO8601()
+    birthday: Date;
 
     @ApiProperty({example: "+380956174454", description: "Номер телефона користувача"})
     @IsNotEmpty()

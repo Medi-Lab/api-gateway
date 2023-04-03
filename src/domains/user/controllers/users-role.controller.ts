@@ -1,8 +1,8 @@
-import {Controller, Inject, Post} from "@nestjs/common";
+import {Body, Controller, Inject, Post} from "@nestjs/common";
 import {ApiOperation, ApiResponse, ApiTags} from "@nestjs/swagger";
-import {AddRoleToUserDto} from "../dto";
-import {UsersRoleServiceInterface} from "../interfaces/users-role.service.interface";
+import {UsersRoleServiceInterface} from "../interfaces";
 import {constants} from "../../../core/constants";
+import {AddRoleToUserDto} from "../dto";
 
 @ApiTags('Додати роль до користувача')
 @Controller('role-user')
@@ -16,7 +16,7 @@ export class UsersRoleController {
     @ApiOperation({summary: 'Додати роль до користувача'})
     @ApiResponse({status: 200})
     @Post()
-    addRoleToUser(addRoleToUserDto: AddRoleToUserDto) {
+    addRoleToUser(@Body() addRoleToUserDto: AddRoleToUserDto) {
         return this.usersRoleService.addRoleToUser(addRoleToUserDto);
     }
 }

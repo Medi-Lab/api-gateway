@@ -5,10 +5,10 @@ export class AddRoleToUserDto {
     @ApiProperty({example: 12, description: "id користувача"})
     @IsNotEmpty()
     @IsNumber()
-    user_id: number;
+    userId: number;
 
     @ApiProperty({example: 1, description: "id ролі"})
     @IsNotEmpty()
     @IsNumber()
-    role_id: number;
+    roleId: number;
 }

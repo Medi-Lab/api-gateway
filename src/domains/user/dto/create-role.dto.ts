@@ -5,7 +5,7 @@ export class CreateRoleDto {
     @ApiProperty({example: "Супер адмін", description: "Назва ролі"})
     @IsNotEmpty()
     @IsString()
-    name: string;
+    title: string;
 
     @ApiProperty({
         example: "Може додавати нові ролі, приймати заявки лікарів і тд...",

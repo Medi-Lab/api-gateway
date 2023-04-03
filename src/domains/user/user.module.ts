@@ -1,8 +1,12 @@
 import {Module} from '@nestjs/common';
-import {UserController} from './user.controller';
+import {UserController} from './controllers/user.controller';
 import {ClientsModule, Transport} from "@nestjs/microservices";
-import {UserService} from "./user.service";
+import {UserService} from "./services/user.service";
 import {constants} from "../../core/constants";
+import {RoleService} from "./services/role.service";
+import {UsersRoleService} from "./services/users-role.service";
+import {RoleController} from "./controllers/role.controller";
+import {UsersRoleController} from "./controllers/users-role.controller";
 
 @Module({
     imports: [
@@ -21,11 +25,23 @@ import {constants} from "../../core/constants";
             }
         ])
     ],
-    controllers: [UserController],
+    controllers: [
+        UserController,
+        RoleController,
+        UsersRoleController
+    ],
     providers: [
         {
             provide: constants.tokens.USER_SERVICE_TOKEN,
             useClass: UserService
+        },
+        {
+            provide: constants.tokens.ROLE_SERVICE_TOKEN,
+            useClass: RoleService
+        },
+        {
+            provide: constants.tokens.USER_ROLE_SERVICE_TOKEN,
+            useClass: UsersRoleService
         }
     ]
 })

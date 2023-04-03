@@ -1,13 +1,12 @@
 import {Module} from '@nestjs/common';
-import {AuthModule} from './domain/auth/auth.module';
-import {ClinicModule} from './domain/clinic/clinic.module';
-import {DoctorModule} from './domain/doctor/doctor.module';
-import {RecordModule} from './domain/record/record.module';
-import {ResponseModule} from './domain/response/response.module';
+import {AuthModule} from './domains/auth/auth.module';
+import {ClinicModule} from './domains/clinic/clinic.module';
+import {DoctorModule} from './domains/doctor/doctor.module';
+import {RecordModule} from './domains/record/record.module';
+import {ResponseModule} from './domains/response/response.module';
 import {ConfigModule} from "@nestjs/config";
-import {UserModule} from "./domain/user/user.module";
-import {RoleModule} from './domain/role/role.module';
-import {AdminModule} from './domain/admin/admin.module';
+import {UserModule} from "./domains/user/user.module";
+import {AdminModule} from './domains/admin/admin.module';
 
 @Module({
     imports: [
@@ -18,7 +17,6 @@ import {AdminModule} from './domain/admin/admin.module';
         DoctorModule,
         RecordModule,
         ResponseModule,
-        RoleModule,
         AdminModule,
     ],
 })

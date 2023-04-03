@@ -1,9 +1,10 @@
 import {Body, Controller, Delete, Get, Inject, Param, Patch, Post} from '@nestjs/common';
 import {ApiOperation, ApiResponse, ApiTags} from "@nestjs/swagger";
-import {RoleService} from "../services";
-import {CreateRoleDto, UpdateRoleDto} from "../dto";
 import {DefaultParam} from "../../../core";
 import {constants} from "../../../core/constants";
+import {RoleService} from "../services/role.service";
+import {CreateRoleDto, UpdateRoleDto} from "../dto";
+import {QueryDb} from "../../../core/decorators/query-db.decorator";
 
 @ApiTags('Роль')
 @Controller('role')
@@ -31,8 +32,8 @@ export class RoleController {
     @ApiOperation({summary: 'Отримати всі ролі'})
     @ApiResponse({status: 200})
     @Get()
-    getRoles() {
-        return this.roleService.getRoles();
+    getRoles(@QueryDb() query) {
+        return this.roleService.getRoles(query);
     }
 
     @ApiOperation({summary: 'Видалити роль'})
