@@ -25,7 +25,7 @@ export class RoleService implements RoleServiceInterface {
 
     updateRoleData(id: string, updateRoleDto: UpdateRoleDto): Observable<ResponseInterface | CreateRoleDto> {
         return this.userClient
-            .send('update_role', {id, data: updateRoleDto})
+            .send('update_role', {id: Number(id), data: updateRoleDto})
             .pipe(
                 map(response => response),
                 catchError(error => of(error))
@@ -43,7 +43,7 @@ export class RoleService implements RoleServiceInterface {
 
     deleteRoleById(id: string): Observable<ResponseInterface | CreateRoleDto> {
         return this.userClient
-            .send('delete_role_by_id', id)
+            .send('delete_role_by_id', Number(id))
             .pipe(
                 map(response => response),
                 catchError(error => of(error))

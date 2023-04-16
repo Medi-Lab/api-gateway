@@ -1,5 +1,17 @@
-import {IsBoolean, IsNotEmpty, IsOptional, IsPhoneNumber, IsString} from "class-validator";
+import {
+    IsBoolean,
+    IsDefined,
+    IsNotEmpty,
+    IsNotEmptyObject,
+    IsObject,
+    IsOptional,
+    IsPhoneNumber,
+    IsString,
+    ValidateNested
+} from "class-validator";
 import {ApiProperty} from "@nestjs/swagger";
+import {Type} from "class-transformer";
+import {WorkTime} from "./work-time.dto";
 
 export class CreateClinicDto {
     @ApiProperty({example: "MedLab", description: "Назва клініки"})
@@ -11,9 +23,30 @@ export class CreateClinicDto {
     @ApiProperty({example: true, description: "Чи приватна клініка"})
     @IsNotEmpty()
     @IsBoolean()
-    is_private: boolean;
+    isPrivate: boolean;
 
-    // work_time:
+    @ApiProperty({
+        example: '{\n' +
+            '        "weekdays": {\n' +
+            '            "from": 8,\n' +
+            '            "to": 16\n' +
+            '        },        \n' +
+            '        "saturday": {\n' +
+            '            "from": 8,\n' +
+            '            "to": 18\n' +
+            '        },\n' +
+            '        "sunday": {\n' +
+            '            "from": 8,\n' +
+            '            "to": 18\n' +
+            '        }\n' +
+            '    }', description: 'Час роботи клініки'
+    })
+    @IsDefined()
+    @IsNotEmptyObject()
+    @IsObject()
+    @ValidateNested()
+    @Type(() => WorkTime)
+    workTime: WorkTime;
 
     @ApiProperty({example: 'Шевченка 57/а', description: "Адрес клініки"})
     @IsNotEmpty()
@@ -22,7 +55,7 @@ export class CreateClinicDto {
 
     @ApiProperty({example: '+360976278245', description: "Контактний номер клініки"})
     @IsNotEmpty()
-    @IsPhoneNumber('UA')
+    @IsPhoneNumber()
     phone: string;
 
     //photo

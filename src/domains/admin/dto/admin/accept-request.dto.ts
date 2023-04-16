@@ -5,10 +5,10 @@ export class AcceptRequestDto {
     @ApiProperty({example: 4, description: "id запиту"})
     @IsNotEmpty()
     @IsNumber()
-    request_id: number;
+    requestId: number;
 
     @ApiProperty({example: 65, description: "id адміна"})
     @IsNotEmpty()
     @IsNumber()
-    admin_id: number;
+    adminId: number;
 }

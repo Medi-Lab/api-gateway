@@ -1,28 +1,59 @@
 import {Module} from '@nestjs/common';
 import {
+    ClinicController,
     ConsultationController,
     DoctorController,
+    EducationController,
+    JobController,
+    PositionController,
     RateController,
     RecommendationController,
     SpecializationController,
+    SpecializationToDoctorController,
 } from "./controllers";
 import {
+    ClinicService,
     ConsultationService,
     DoctorService,
+    EducationService,
+    JobService,
+    PositionService,
     RateService,
     RecommendationService,
     SpecializationService,
-    WorkTimeService
+    SpecializationToDoctorService,
 } from "./services";
 import {constants} from "../../core/constants";
+import {ClientsModule, Transport} from "@nestjs/microservices";
 
 @Module({
+    imports: [
+        ClientsModule.register([
+            // ...registerMicroservices(Object.keys(constants.microservices_names)),
+            {
+                name: constants.microservices_names.doctor,
+                transport: Transport.RMQ,
+                options: {
+                    urls: ['amqp://rabbitmq:5672'],
+                    queue: constants.microservices_queues.doctor,
+                    queueOptions: {
+                        durable: true
+                    },
+                }
+            }
+        ])
+    ],
     controllers: [
         DoctorController,
         RecommendationController,
         ConsultationController,
         RateController,
-        SpecializationController
+        SpecializationController,
+        ClinicController,
+        EducationController,
+        JobController,
+        PositionController,
+        SpecializationToDoctorController
     ],
     providers: [
         {
@@ -38,16 +69,32 @@ import {constants} from "../../core/constants";
             useClass: ConsultationService
         },
         {
-            provide: constants.tokens.WORK_TIME_SERVICE_TOKEN,
-            useClass: WorkTimeService
-        },
-        {
             provide: constants.tokens.RATE_SERVICE_TOKEN,
             useClass: RateService
         },
         {
             provide: constants.tokens.SPECIALIZATION_SERVICE_TOKEN,
             useClass: SpecializationService
+        },
+        {
+            provide: constants.tokens.ADD_DOCTOR_TO_CLINIC_SERVICE_TOKEN,
+            useClass: ClinicService
+        },
+        {
+            provide: constants.tokens.EDUCATION_SERVICE_TOKEN,
+            useClass: EducationService
+        },
+        {
+            provide: constants.tokens.JOB_SERVICE_TOKEN,
+            useClass: JobService
+        },
+        {
+            provide: constants.tokens.POSITION_SERVICE_TOKEN,
+            useClass: PositionService
+        },
+        {
+            provide: constants.tokens.SPECIALIZATION_TO_DOCTOR_SERVICE_TOKEN,
+            useClass: SpecializationToDoctorService
         }
     ]
 })

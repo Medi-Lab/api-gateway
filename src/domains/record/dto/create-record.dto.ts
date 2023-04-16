@@ -5,12 +5,12 @@ export class CreateRecordDto {
     @ApiProperty({example: 12, description: "id користувача"})
     @IsNotEmpty()
     @IsNumber()
-    user_id: number;
+    userId: number;
 
     @ApiProperty({example: 2, description: "id лікаря"})
     @IsNotEmpty()
     @IsNumber()
-    doctor_id: number;
+    doctorId: number;
 
     @ApiProperty({example: 'Болить горло', description: "Причина приходу до лікаря"})
     @IsNotEmpty()
@@ -20,12 +20,12 @@ export class CreateRecordDto {
     @ApiProperty({example: '2023-08-09T18:30:00', description: "Дата початку прийому"})
     @IsNotEmpty()
     @IsISO8601()
-    date_start: Date;
+    dateStart: Date;
 
     @ApiProperty({example: '2023-08-09T18:40:00', description: "Дата кінця прийому"})
     @IsNotEmpty()
     @IsISO8601()
-    date_end: Date;
+    dateEnd: Date;
 
 
     @ApiProperty({
@@ -39,12 +39,12 @@ export class CreateRecordDto {
     @ApiProperty({example: '2023-08-09T18:31:32', description: "Фактична дата початку прийому"})
     @IsOptional()
     @IsISO8601()
-    actual_date_start?: Date;
+    actualDateStart?: Date;
 
     @ApiProperty({example: '2023-08-09T18:45:34', description: "Фактична дата кінця прийому"})
     @IsOptional()
     @IsISO8601()
-    actual_date_end?: Date;
+    actualDateEnd?: Date;
 
     @ApiProperty({
         example: 'Дуже болить горло, першить просто капець',
@@ -52,12 +52,12 @@ export class CreateRecordDto {
     })
     @IsOptional()
     @IsString()
-    reason_for_recording_description?: string;
+    reasonForRecordingDescription?: string;
 
     @ApiProperty({example: 'Пити амізон і смоктульки', description: "Рекомендації лікаря пацієнту"})
     @IsOptional()
     @IsString()
-    doctors_recommendation?: string;
+    doctorsRecommendation?: string;
 
     // photo
     @ApiProperty({example: 'link to the photo', description: "Тут в майбутньому має бути фото рецепту"})

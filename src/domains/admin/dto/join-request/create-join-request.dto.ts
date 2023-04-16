@@ -5,7 +5,7 @@ export class CreateJoinRequestDto {
     @ApiProperty({example: 3, description: "id користувача"})
     @IsNumber()
     @IsNotEmpty()
-    user_id: number;
+    userId: number;
 
     @ApiProperty({
         example: 'Хочу працювати на цьому сервісі',
@@ -13,7 +13,7 @@ export class CreateJoinRequestDto {
     })
     @IsString()
     @IsNotEmpty()
-    description_reason: string;
+    descriptionReason: string;
 
     //Date start
 

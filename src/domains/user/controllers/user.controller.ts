@@ -31,28 +31,28 @@ export class UserController {
     @ApiOperation({summary: 'Редагувати користувача'})
     @ApiResponse({status: 200})
     @Patch(':id')
-    updateUser(@Param() {id}: DefaultParam, @Body() updateUserDto: UpdateUserDto) {
+    updateUser(@Param() {id}: DefaultParam, @Body() updateUserDto: UpdateUserDto): Observable<ResponseInterface | CreateUserDto> {
         return this.userService.updateUser(id, updateUserDto);
     }
 
     @ApiOperation({summary: 'Отримати користувача'})
     @ApiResponse({status: 200})
     @Get(':id')
-    getUser(@Param() {id}: DefaultParam) {
+    getUser(@Param() {id}: DefaultParam): Observable<ResponseInterface | CreateUserDto> {
         return this.userService.getUserById(id);
     }
 
     @ApiOperation({summary: 'Отримати користувачів'})
     @ApiResponse({status: 200})
     @Get()
-    getUsers(@QueryDb() query) {
+    getUsers(@QueryDb() query): Observable<CreateUserDto[]> {
         return this.userService.getUsers(query);
     }
 
     @ApiOperation({summary: 'Видалити користувача'})
     @ApiResponse({status: 200})
     @Delete(':id')
-    deleteUser(@Param() {id}: DefaultParam) {
+    deleteUser(@Param() {id}: DefaultParam): Observable<ResponseInterface | CreateUserDto> {
         return this.userService.deleteUserById(id);
     }
 }

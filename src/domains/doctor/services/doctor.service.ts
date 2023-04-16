@@ -1,30 +1,70 @@
-import {Injectable} from '@nestjs/common';
+import {Inject, Injectable} from '@nestjs/common';
 import {CreateDoctorDto, UpdateDoctorDto} from "../dto";
 import {DoctorServiceInterface} from "../interfaces";
+import {constants} from "../../../core/constants";
+import {ClientProxy} from "@nestjs/microservices";
+import {catchError, map, Observable, of} from "rxjs";
+import {ResponseInterface} from "../../../core/error/response.interface";
 
 @Injectable()
 export class DoctorService implements DoctorServiceInterface {
-    createDoctor(createDoctorDto: CreateDoctorDto) {
-        return createDoctorDto;
+    constructor(
+        @Inject(constants.microservices_names.doctor)
+        private readonly doctorClient: ClientProxy
+    ) {
     }
 
-    updateDoctor(id: string, updateDoctorDto: UpdateDoctorDto) {
-        return {id, updateDoctorDto};
+    createDoctor(createDoctorDto: CreateDoctorDto): Observable<ResponseInterface | CreateDoctorDto> {
+        return this.doctorClient
+            .send('create_doctor', createDoctorDto)
+            .pipe(
+                map(response => response),
+                catchError(error => of(error))
+            );
     }
 
-    getDoctorById(id: string) {
-        return id;
+    updateDoctor(id: string, updateDoctorDto: UpdateDoctorDto): Observable<ResponseInterface | CreateDoctorDto> {
+        return this.doctorClient
+            .send('update_doctor', {id: Number(id), data: updateDoctorDto})
+            .pipe(
+                map(response => response),
+                catchError(error => of(error))
+            );
     }
 
-    getDoctors() {
-        return [];
+    getDoctorById(id: string): Observable<ResponseInterface | CreateDoctorDto> {
+        return this.doctorClient
+            .send('get_doctor_by_id', Number(id))
+            .pipe(
+                map(response => response),
+                catchError(error => of(error))
+            );
     }
 
-    getMyDoctors(userId: string) {
-        return [userId]
+    getDoctors(query): Observable<CreateDoctorDto[]> {
+        return this.doctorClient
+            .send('get_doctors', query)
+            .pipe(
+                map(response => response),
+                catchError(error => of(error))
+            );
     }
 
-    deleteDoctorById(id: string) {
-        return id;
+    getMyDoctors(userId: string): Observable<CreateDoctorDto[]> {
+        return this.doctorClient
+            .send('get_my_doctors', Number(userId))
+            .pipe(
+                map(response => response),
+                catchError(error => of(error))
+            );
+    }
+
+    deleteDoctorById(id: string): Observable<ResponseInterface | CreateDoctorDto> {
+        return this.doctorClient
+            .send('delete_doctor_by_id', Number(id))
+            .pipe(
+                map(response => response),
+                catchError(error => of(error))
+            );
     }
 }

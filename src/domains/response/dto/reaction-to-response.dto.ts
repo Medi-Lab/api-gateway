@@ -5,7 +5,7 @@ export class ReactionToResponseDto {
     @ApiProperty({example: 4, description: "Відгук який хочуть лайкнути чи дизлайкнути"})
     @IsNotEmpty()
     @IsNumber()
-    response_id: number;
+    responseId: number;
 
     @ApiProperty({
         example: 33,
@@ -13,5 +13,5 @@ export class ReactionToResponseDto {
     })
     @IsNotEmpty()
     @IsNumber()
-    user_id: number;
+    userId: number;
 }

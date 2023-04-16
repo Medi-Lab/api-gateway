@@ -26,7 +26,7 @@ export class UserService implements UserServiceInterface {
 
     updateUser(id: string, updateUserDto: UpdateUserDto): Observable<ResponseInterface | CreateUserDto> {
         return this.userClient
-            .send('update_user', {id, data: updateUserDto})
+            .send('update_user', {id: Number(id), data: updateUserDto})
             .pipe(
                 map(response => response),
                 catchError(error => of(error))
@@ -35,7 +35,7 @@ export class UserService implements UserServiceInterface {
 
     getUserById(id: string): Observable<ResponseInterface | CreateUserDto> {
         return this.userClient
-            .send('get_user_by_id', id)
+            .send('get_user_by_id', Number(id))
             .pipe(
                 map(response => response),
                 catchError(error => of(error))
@@ -53,7 +53,7 @@ export class UserService implements UserServiceInterface {
 
     deleteUserById(id: string): Observable<ResponseInterface | CreateUserDto> {
         return this.userClient
-            .send('delete_user_by_id', id)
+            .send('delete_user_by_id', Number(id))
             .pipe(
                 map(response => response),
                 catchError(error => of(error))

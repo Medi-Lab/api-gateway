@@ -4,6 +4,9 @@ import {CreateConsultationDto, UpdateConsultationDto} from "../dto";
 import {DefaultParam} from "../../../core";
 import {constants} from "../../../core/constants";
 import {ConsultationServiceInterface} from "../interfaces";
+import {Observable} from "rxjs";
+import {ResponseInterface} from "../../../core/error/response.interface";
+import {QueryDb} from "../../../core/decorators/query-db.decorator";
 
 @ApiTags('Консультація в лікаря')
 @Controller('consultation')
@@ -16,7 +19,7 @@ export class ConsultationController {
     @ApiOperation({summary: 'Додати консультацію'})
     @ApiResponse({status: 200})
     @Post()
-    addConsultation(@Body() createConsultationDto: CreateConsultationDto) {
+    addConsultation(@Body() createConsultationDto: CreateConsultationDto): Observable<ResponseInterface | CreateConsultationDto> {
         return this.consultationService.createConsultation(createConsultationDto);
     }
 
@@ -24,30 +27,30 @@ export class ConsultationController {
     @ApiOperation({summary: 'Обновити консультації'})
     @ApiResponse({status: 200})
     @Patch(':id')
-    updateDoctorsConsultations(@Param() {id}: DefaultParam, @Body() updateConsultationDto: UpdateConsultationDto) {
+    updateDoctorsConsultations(@Param() {id}: DefaultParam, @Body() updateConsultationDto: UpdateConsultationDto): Observable<ResponseInterface | CreateConsultationDto> {
         return this.consultationService.updateConsultation(id, updateConsultationDto);
-    }
-
-    @ApiOperation({summary: 'Отримати конслультації'})
-    @ApiResponse({status: 200})
-    @Get()
-    getConsultations() {
-        return this.consultationService.getConsultations();
     }
 
     //by doctors id
     @ApiOperation({summary: 'Отримати консультації'})
     @ApiResponse({status: 200})
     @Get(':id')
-    getDoctorsConsultations(@Param() {id}: DefaultParam) {
-        return this.consultationService.getConsultationById(id);
+    getDoctorsConsultations(@Param() {id}: DefaultParam): Observable<ResponseInterface | CreateConsultationDto> {
+        return this.consultationService.getDoctorsConsultationsById(id);
+    }
+
+    @ApiOperation({summary: 'Отримати конслультації'})
+    @ApiResponse({status: 200})
+    @Get()
+    getConsultations(@QueryDb() query): Observable<CreateConsultationDto[]> {
+        return this.consultationService.getConsultations(query);
     }
 
     //by doctors id
     @ApiOperation({summary: 'Видалити консультації'})
     @ApiResponse({status: 200})
     @Delete(':id')
-    deleteDoctorsConsultation(@Param() {id}: DefaultParam) {
+    deleteDoctorsConsultation(@Param() {id}: DefaultParam): Observable<ResponseInterface | CreateConsultationDto> {
         return this.consultationService.deleteConsultationById(id);
     }
 }

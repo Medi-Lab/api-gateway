@@ -3,6 +3,8 @@ import {ApiOperation, ApiResponse, ApiTags} from "@nestjs/swagger";
 import {UsersRoleServiceInterface} from "../interfaces";
 import {constants} from "../../../core/constants";
 import {AddRoleToUserDto} from "../dto";
+import {Observable} from "rxjs";
+import {ResponseInterface} from "../../../core/error/response.interface";
 
 @ApiTags('Додати роль до користувача')
 @Controller('role-user')
@@ -16,7 +18,7 @@ export class UsersRoleController {
     @ApiOperation({summary: 'Додати роль до користувача'})
     @ApiResponse({status: 200})
     @Post()
-    addRoleToUser(@Body() addRoleToUserDto: AddRoleToUserDto) {
+    addRoleToUser(@Body() addRoleToUserDto: AddRoleToUserDto): Observable<ResponseInterface> {
         return this.usersRoleService.addRoleToUser(addRoleToUserDto);
     }
 }

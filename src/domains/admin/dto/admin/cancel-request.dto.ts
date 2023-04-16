@@ -5,15 +5,15 @@ export class CancelRequestDto {
     @ApiProperty({example: 4, description: "id запиту"})
     @IsNotEmpty()
     @IsNumber()
-    request_id: number;
+    requestId: number;
 
     @ApiProperty({example: 65, description: "id адміна"})
     @IsNotEmpty()
     @IsNumber()
-    admin_id: number;
+    adminId: number;
 
     @ApiProperty({example: 'Нє вєрю, нє вєрю', description: "Чому адмін не прийняв заявку"})
     @IsOptional()
     @IsString()
-    cancel_reason?: string;
+    cancelReason?: string;
 }

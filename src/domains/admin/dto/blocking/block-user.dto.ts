@@ -5,12 +5,12 @@ export class BlockUserDto {
     @ApiProperty({example: 49, description: "id користувача"})
     @IsNotEmpty()
     @IsNumber()
-    user_id: number;
+    userId: number;
 
     @ApiProperty({example: 99, description: "id користувача адміна(який заблокував)"})
     @IsNotEmpty()
     @IsNumber()
-    admin_id: number;
+    adminId: number;
 
     @ApiProperty({example: '15-03-2023', description: "До якого часу буде відбуватися блокування"})
     @IsNotEmpty()
@@ -21,10 +21,10 @@ export class BlockUserDto {
     @ApiProperty({example: 1, description: "наприклад будуть constants spam:1"})
     @IsNotEmpty()
     @IsNumber()
-    block_reason: number;
+    blockReason: number;
 
     @ApiProperty({example: 'Спамив в того лікаря', description: "Детальний опис причини блокування"})
     @IsOptional()
     @IsString()
-    block_description?: string;
+    blockDescription?: string;
 }

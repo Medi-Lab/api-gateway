@@ -1,9 +1,11 @@
-import {CreateRateDto} from "../dto";
+import {CreateRateDto, GetUserRateDto} from "../dto";
+import {Observable} from "rxjs";
+import {ResponseInterface} from "../../../core/error/response.interface";
 
 export interface RateServiceInterface {
-    rateDoctor(createRateDto: CreateRateDto);
+    rateDoctor(createRateDto: CreateRateDto): Observable<ResponseInterface | CreateRateDto>;
 
-    getAverageRateOfDoctor(id: string);
+    getAverageRateOfDoctor(id: string): Observable<ResponseInterface>;
 
-    getUserRate(query: any);
+    getUserRate(query: GetUserRateDto): Observable<ResponseInterface>;
 }
