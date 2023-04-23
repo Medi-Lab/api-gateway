@@ -4,7 +4,6 @@ import {constants} from "../../../core/constants";
 import {ClientProxy} from "@nestjs/microservices";
 import {CreateDoctorsPositionDto, UpdateDoctorsPositionDto} from "../dto";
 import {catchError, map, Observable, of} from "rxjs";
-import {ResponseInterface} from "../../../core/error/response.interface";
 
 @Injectable()
 export class PositionService implements PositionServiceInterface {
@@ -14,7 +13,9 @@ export class PositionService implements PositionServiceInterface {
     ) {
     }
 
-    createPosition(createPositionDto: CreateDoctorsPositionDto): Observable<ResponseInterface | CreateDoctorsPositionDto> {
+    createPosition(
+        createPositionDto: CreateDoctorsPositionDto
+    ): Observable<CreateDoctorsPositionDto> {
         return this.doctorClient
             .send('create_position', createPositionDto)
             .pipe(
@@ -23,7 +24,10 @@ export class PositionService implements PositionServiceInterface {
             );
     }
 
-    updatePosition(id: string, updatePositionDto: UpdateDoctorsPositionDto): Observable<ResponseInterface | CreateDoctorsPositionDto> {
+    updatePosition(
+        id: string,
+        updatePositionDto: UpdateDoctorsPositionDto
+    ): Observable<CreateDoctorsPositionDto> {
         return this.doctorClient
             .send('update_position', {id: Number(id), data: updatePositionDto})
             .pipe(
@@ -41,7 +45,7 @@ export class PositionService implements PositionServiceInterface {
             );
     }
 
-    deletePositionById(id: string): Observable<ResponseInterface | CreateDoctorsPositionDto> {
+    deletePositionById(id: string): Observable<CreateDoctorsPositionDto> {
         return this.doctorClient
             .send('delete_position_by_id', Number(id))
             .pipe(

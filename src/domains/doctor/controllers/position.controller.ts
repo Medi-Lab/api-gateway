@@ -3,7 +3,6 @@ import {constants} from "../../../core/constants";
 import {PositionServiceInterface} from "../interfaces";
 import {ApiOperation, ApiResponse, ApiTags} from "@nestjs/swagger";
 import {Observable} from "rxjs";
-import {ResponseInterface} from "../../../core/error/response.interface";
 import {CreateDoctorsPositionDto, UpdateDoctorsPositionDto} from "../dto";
 import {DefaultParam} from "../../../core";
 
@@ -19,14 +18,19 @@ export class PositionController {
     @ApiOperation({summary: 'Створити посаду'})
     @ApiResponse({status: 200})
     @Post()
-    createPosition(@Body() createPositionDto: CreateDoctorsPositionDto): Observable<ResponseInterface | CreateDoctorsPositionDto> {
+    createPosition(
+        @Body() createPositionDto: CreateDoctorsPositionDto
+    ): Observable<CreateDoctorsPositionDto> {
         return this.positionService.createPosition(createPositionDto);
     }
 
     @ApiOperation({summary: 'Змінити дані про посаду'})
     @ApiResponse({status: 200})
     @Patch(':id')
-    updatePosition(@Param() {id}: DefaultParam, @Body() updatePositionDto: UpdateDoctorsPositionDto): Observable<ResponseInterface | CreateDoctorsPositionDto> {
+    updatePosition(
+        @Param() {id}: DefaultParam,
+        @Body() updatePositionDto: UpdateDoctorsPositionDto
+    ): Observable<CreateDoctorsPositionDto> {
         return this.positionService.updatePosition(id, updatePositionDto);
     }
 
@@ -40,7 +44,7 @@ export class PositionController {
     @ApiOperation({summary: 'Видалити посаду'})
     @ApiResponse({status: 200})
     @Delete(':id')
-    deletePositionById(@Param() {id}: DefaultParam): Observable<ResponseInterface | CreateDoctorsPositionDto> {
+    deletePositionById(@Param() {id}: DefaultParam): Observable<CreateDoctorsPositionDto> {
         return this.positionService.deletePositionById(id);
     }
 }

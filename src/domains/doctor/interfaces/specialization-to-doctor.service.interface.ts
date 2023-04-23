@@ -1,13 +1,26 @@
-import {AddSpecializationToDoctorDto, CreateSpecializationDto, UpdateSpecializationToDoctorDto} from "../dto";
+import {
+    AddSpecializationToDoctorDto,
+    CreateSpecializationDto,
+    SpecializationToDoctorDto,
+    UpdateSpecializationToDoctorDto
+} from "../dto";
 import {Observable} from "rxjs";
-import {ResponseInterface} from "../../../core/error/response.interface";
 
 export interface SpecializationToDoctorServiceInterface {
-    addSpecializationToDoctor(addSpecializationToDoctorDto: AddSpecializationToDoctorDto): Observable<ResponseInterface>;
+    addSpecializationToDoctor(
+        addSpecializationToDoctorDto: AddSpecializationToDoctorDto
+    ): Observable<AddSpecializationToDoctorDto>;
 
-    updateSpecializationToDoctor(id: string, updateSpecializationToDoctorDto: UpdateSpecializationToDoctorDto): Observable<ResponseInterface>;
+    updateSpecializationToDoctor(
+        specializationToDoctor: SpecializationToDoctorDto,
+        updateSpecializationToDoctorDto: UpdateSpecializationToDoctorDto
+    ): Observable<AddSpecializationToDoctorDto>;
 
-    getDoctorsSpecializations(doctorId: string): Observable<ResponseInterface | CreateSpecializationDto[]>
+    getDoctorsSpecializations(
+        doctorId: string
+    ): Observable<CreateSpecializationDto[]>
 
-    deleteSpecializationToDoctor(deleteSpecializationToDoctorDto: AddSpecializationToDoctorDto): Observable<ResponseInterface>;
+    deleteSpecializationToDoctor(
+        deleteSpecializationToDoctorDto: SpecializationToDoctorDto
+    ): Observable<AddSpecializationToDoctorDto>;
 }

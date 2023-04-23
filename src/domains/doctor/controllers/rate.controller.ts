@@ -17,7 +17,7 @@ export class RateController {
     @ApiOperation({summary: 'Оцінити лікаря'})
     @ApiResponse({status: 200})
     @Post()
-    rateDoctor(@Body() createRateDto: CreateRateDto): Observable<ResponseInterface | CreateRateDto> {
+    rateDoctor(@Body() createRateDto: CreateRateDto): Observable<CreateRateDto> {
         return this.rateService.rateDoctor(createRateDto);
     }
 
@@ -28,11 +28,10 @@ export class RateController {
         return this.rateService.getAverageRateOfDoctor(id);
     }
 
-    //?id_user=1&id_doctor=2
     @ApiOperation({summary: 'Отримати дані про те як користуваач оцінив лікаря'})
     @ApiResponse({status: 200})
     @Get()
-    getUserRate(@Query() query: GetUserRateDto): Observable<ResponseInterface> {
+    getUserRate(@Query() query: GetUserRateDto): Observable<CreateRateDto> {
         return this.rateService.getUserRate(query);
     }
 }

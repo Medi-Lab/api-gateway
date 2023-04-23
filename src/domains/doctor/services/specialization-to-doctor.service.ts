@@ -2,9 +2,13 @@ import {Inject, Injectable} from "@nestjs/common";
 import {SpecializationToDoctorServiceInterface} from "../interfaces";
 import {constants} from "../../../core/constants";
 import {ClientProxy} from "@nestjs/microservices";
-import {AddSpecializationToDoctorDto, CreateSpecializationDto, UpdateSpecializationToDoctorDto} from "../dto";
+import {
+    AddSpecializationToDoctorDto,
+    CreateSpecializationDto,
+    SpecializationToDoctorDto,
+    UpdateSpecializationToDoctorDto
+} from "../dto";
 import {catchError, map, Observable, of} from "rxjs";
-import {ResponseInterface} from "../../../core/error/response.interface";
 
 @Injectable()
 export class SpecializationToDoctorService implements SpecializationToDoctorServiceInterface {
@@ -14,7 +18,9 @@ export class SpecializationToDoctorService implements SpecializationToDoctorServ
     ) {
     }
 
-    addSpecializationToDoctor(addSpecializationToDoctorDto: AddSpecializationToDoctorDto): Observable<ResponseInterface> {
+    addSpecializationToDoctor(
+        addSpecializationToDoctorDto: AddSpecializationToDoctorDto
+    ): Observable<AddSpecializationToDoctorDto> {
         return this.doctorClient
             .send('add_specialization_to_doctor', addSpecializationToDoctorDto)
             .pipe(
@@ -23,16 +29,27 @@ export class SpecializationToDoctorService implements SpecializationToDoctorServ
             );
     }
 
-    updateSpecializationToDoctor(id: string, updateSpecializationToDoctorDto: UpdateSpecializationToDoctorDto): Observable<ResponseInterface> {
+    updateSpecializationToDoctor(
+        specializationToDoctor: SpecializationToDoctorDto,
+        updateSpecializationToDoctorDto: UpdateSpecializationToDoctorDto
+    ): Observable<AddSpecializationToDoctorDto> {
         return this.doctorClient
-            .send('update_specialization_to_doctor', {id: Number(id), data: updateSpecializationToDoctorDto})
+            .send('update_specialization_to_doctor', {
+                specializationToDoctor: {
+                    specializationId: Number(specializationToDoctor.specializationId),
+                    doctorId: Number(specializationToDoctor.doctorId),
+                },
+                data: updateSpecializationToDoctorDto
+            })
             .pipe(
                 map(response => response),
                 catchError(error => of(error))
             );
     }
 
-    getDoctorsSpecializations(doctorId: string): Observable<ResponseInterface | CreateSpecializationDto[]> {
+    getDoctorsSpecializations(
+        doctorId: string
+    ): Observable<CreateSpecializationDto[]> {
         return this.doctorClient
             .send('get_doctors_specializations', Number(doctorId))
             .pipe(
@@ -41,9 +58,15 @@ export class SpecializationToDoctorService implements SpecializationToDoctorServ
             );
     }
 
-    deleteSpecializationToDoctor(deleteSpecializationToDoctorDto: AddSpecializationToDoctorDto): Observable<ResponseInterface> {
+    deleteSpecializationToDoctor(
+        deleteSpecializationToDoctorDto: SpecializationToDoctorDto
+    ): Observable<AddSpecializationToDoctorDto> {
         return this.doctorClient
-            .send('delete_specialization_to_doctor', deleteSpecializationToDoctorDto)
+            .send('delete_specialization_to_doctor',
+                {
+                    specializationId: Number(deleteSpecializationToDoctorDto.specializationId),
+                    doctorId: Number(deleteSpecializationToDoctorDto.doctorId)
+                })
             .pipe(
                 map(response => response),
                 catchError(error => of(error))

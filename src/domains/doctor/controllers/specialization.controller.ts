@@ -5,7 +5,6 @@ import {DefaultParam} from "../../../core";
 import {SpecializationServiceInterface} from "../interfaces";
 import {constants} from "../../../core/constants";
 import {Observable} from "rxjs";
-import {ResponseInterface} from "../../../core/error/response.interface";
 import {QueryDb} from "../../../core/decorators/query-db.decorator";
 
 @Controller('specialization')
@@ -19,21 +18,26 @@ export class SpecializationController {
     @ApiOperation({summary: 'Створити спеціалізацію'})
     @ApiResponse({status: 200})
     @Post()
-    createSpecialization(@Body() createSpecializationDto: CreateSpecializationDto): Observable<ResponseInterface | CreateSpecializationDto> {
+    createSpecialization(
+        @Body() createSpecializationDto: CreateSpecializationDto
+    ): Observable<CreateSpecializationDto> {
         return this.specializationService.createSpecialization(createSpecializationDto);
     }
 
     @ApiOperation({summary: 'Редагувати спеціалізацію'})
     @ApiResponse({status: 200})
     @Patch(':id')
-    updateSpecialization(@Param() {id}: DefaultParam, @Body() updateSpecializationDto: UpdateSpecializationDto): Observable<ResponseInterface | CreateSpecializationDto> {
+    updateSpecialization(
+        @Param() {id}: DefaultParam,
+        @Body() updateSpecializationDto: UpdateSpecializationDto
+    ): Observable<CreateSpecializationDto> {
         return this.specializationService.updateSpecialization(id, updateSpecializationDto);
     }
 
     @ApiOperation({summary: 'Отримати спеціалізацію'})
     @ApiResponse({status: 200})
     @Get(':id')
-    getSpecialization(@Param() {id}: DefaultParam): Observable<ResponseInterface | CreateSpecializationDto> {
+    getSpecialization(@Param() {id}: DefaultParam): Observable<CreateSpecializationDto> {
         return this.specializationService.getSpecializationById(id);
     }
 
@@ -47,7 +51,7 @@ export class SpecializationController {
     @ApiOperation({summary: 'Видалити спеціалізацію'})
     @ApiResponse({status: 200})
     @Delete(':id')
-    deleteSpecialization(@Param() {id}: DefaultParam): Observable<ResponseInterface | CreateSpecializationDto> {
+    deleteSpecialization(@Param() {id}: DefaultParam): Observable<CreateSpecializationDto> {
         return this.specializationService.deleteSpecializationById(id);
     }
 }

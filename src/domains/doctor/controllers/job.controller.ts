@@ -4,7 +4,6 @@ import {constants} from "../../../core/constants";
 import {JobServiceInterface} from "../interfaces";
 import {CreateJobDto, UpdateJobDto} from "../dto";
 import {Observable} from "rxjs";
-import {ResponseInterface} from "../../../core/error/response.interface";
 import {DefaultParam} from "../../../core";
 
 @ApiTags('Робота')
@@ -19,14 +18,19 @@ export class JobController {
     @ApiOperation({summary: 'Створити роботу'})
     @ApiResponse({status: 200})
     @Post()
-    createJob(@Body() createJobDto: CreateJobDto): Observable<ResponseInterface | CreateJobDto> {
+    createJob(
+        @Body() createJobDto: CreateJobDto
+    ): Observable<CreateJobDto> {
         return this.jobService.createJob(createJobDto);
     }
 
     @ApiOperation({summary: 'Змінити дані про роботу'})
     @ApiResponse({status: 200})
     @Patch(':id')
-    updateJob(@Param() {id}: DefaultParam, @Body() updateJobDto: UpdateJobDto): Observable<ResponseInterface | CreateJobDto> {
+    updateJob(
+        @Param() {id}: DefaultParam,
+        @Body() updateJobDto: UpdateJobDto
+    ): Observable<CreateJobDto> {
         return this.jobService.updateJob(id, updateJobDto);
     }
 
@@ -40,7 +44,7 @@ export class JobController {
     @ApiOperation({summary: 'Видалити роботу'})
     @ApiResponse({status: 200})
     @Delete(':id')
-    deleteJobById(@Param() {id}: DefaultParam): Observable<ResponseInterface | CreateJobDto> {
+    deleteJobById(@Param() {id}: DefaultParam): Observable<CreateJobDto> {
         return this.jobService.deleteJobById(id);
     }
 }

@@ -11,7 +11,10 @@ import {CreateClinicDto} from "../../clinic/dto";
 export interface ClinicServiceInterface {
     addDoctorToClinic(addDoctorToClinicDto: AddDoctorToClinicDto): Observable<ResponseInterface>;
 
-    changeDoctorsClinicConnection(query: QueryParamsToChangeDoctorsClinicDto, updateDoctorToClinicDto: UpdateDoctorToClinicDto): Observable<ResponseInterface>;
+    changeDoctorsClinicConnection(
+        query: QueryParamsToChangeDoctorsClinicDto,
+        updateDoctorToClinicDto: UpdateDoctorToClinicDto
+    ): Observable<ResponseInterface>;
 
     getClinicsInWhichDoctorWork(doctorId: string): Observable<CreateClinicDto[]>;
 

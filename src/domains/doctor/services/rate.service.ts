@@ -14,7 +14,7 @@ export class RateService implements RateServiceInterface {
     ) {
     }
 
-    rateDoctor(createRateDto: CreateRateDto): Observable<ResponseInterface | CreateRateDto> {
+    rateDoctor(createRateDto: CreateRateDto): Observable<CreateRateDto> {
         return this.doctorClient
             .send('rate', createRateDto)
             .pipe(
@@ -23,7 +23,6 @@ export class RateService implements RateServiceInterface {
             );
     }
 
-    //doctor_id
     getAverageRateOfDoctor(id: string): Observable<ResponseInterface> {
         return this.doctorClient
             .send('get_average_rate_of_doctor', Number(id))
@@ -33,8 +32,7 @@ export class RateService implements RateServiceInterface {
             );
     }
 
-    getUserRate(query: GetUserRateDto): Observable<ResponseInterface> {
-        console.log("queryqueryqueryquery", query)
+    getUserRate(query: GetUserRateDto): Observable<CreateRateDto> {
         return this.doctorClient
             .send('get_user_rate', {userId: Number(query.userId), doctorId: Number(query.doctorId)})
             .pipe(

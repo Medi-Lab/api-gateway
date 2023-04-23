@@ -5,7 +5,6 @@ import {DefaultParam} from "../../../core";
 import {constants} from "../../../core/constants";
 import {DoctorServiceInterface} from "../interfaces";
 import {Observable} from "rxjs";
-import {ResponseInterface} from "../../../core/error/response.interface";
 import {QueryDb} from "../../../core/decorators/query-db.decorator";
 
 @ApiTags('Лікар')
@@ -20,21 +19,21 @@ export class DoctorController {
     @ApiOperation({summary: 'Створити лікаря'})
     @ApiResponse({status: 200})
     @Post()
-    createDoctor(@Body() createDoctorDto: CreateDoctorDto): Observable<ResponseInterface | CreateDoctorDto> {
+    createDoctor(@Body() createDoctorDto: CreateDoctorDto): Observable<CreateDoctorDto> {
         return this.doctorService.createDoctor(createDoctorDto);
     }
 
     @ApiOperation({summary: 'Змінити дані про лікаря'})
     @ApiResponse({status: 200})
     @Patch(':id')
-    updateDoctor(@Param() {id}: DefaultParam, @Body() updateDoctorDto: UpdateDoctorDto): Observable<ResponseInterface | CreateDoctorDto> {
+    updateDoctor(@Param() {id}: DefaultParam, @Body() updateDoctorDto: UpdateDoctorDto): Observable<CreateDoctorDto> {
         return this.doctorService.updateDoctor(id, updateDoctorDto);
     }
 
     @ApiOperation({summary: 'Отримати лікаря'})
     @ApiResponse({status: 200})
     @Get(':id')
-    getDoctor(@Param() {id}: DefaultParam): Observable<ResponseInterface | CreateDoctorDto> {
+    getDoctor(@Param() {id}: DefaultParam): Observable<CreateDoctorDto> {
         return this.doctorService.getDoctorById(id);
     }
 
@@ -49,7 +48,7 @@ export class DoctorController {
     @ApiOperation({summary: 'Переглянути список лікарів яких я вже відвідував'})
     @ApiResponse({status: 200})
     @Get('visited')
-    //user_id request to the records find records by user_id -> get doctors_id(це і є id лікарів, які є твоїми лікарями)
+    //TODO user_id request to the records find records by user_id -> get doctors_id(це і є id лікарів, які є твоїми лікарями)
     getMyDoctors(@Param() {id}: DefaultParam): Observable<CreateDoctorDto[]> {
         return this.doctorService.getMyDoctors(id);
     }
@@ -57,7 +56,7 @@ export class DoctorController {
     @ApiOperation({summary: 'Видалити лікаря'})
     @ApiResponse({status: 200})
     @Delete(':id')
-    deleteDoctor(@Param() {id}: DefaultParam): Observable<ResponseInterface | CreateDoctorDto> {
+    deleteDoctor(@Param() {id}: DefaultParam): Observable<CreateDoctorDto> {
         return this.doctorService.deleteDoctorById(id);
     }
 }

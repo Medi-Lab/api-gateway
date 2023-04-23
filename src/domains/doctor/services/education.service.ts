@@ -4,7 +4,6 @@ import {constants} from "../../../core/constants";
 import {ClientProxy} from "@nestjs/microservices";
 import {AddDoctorsEducationDto, UpdateDoctorsEducationDto} from "../dto";
 import {catchError, map, Observable, of} from "rxjs";
-import {ResponseInterface} from "../../../core/error/response.interface";
 
 @Injectable()
 export class EducationService implements EducationServiceInterface {
@@ -14,7 +13,7 @@ export class EducationService implements EducationServiceInterface {
     ) {
     }
 
-    createEducation(createEducationDto: AddDoctorsEducationDto): Observable<ResponseInterface | AddDoctorsEducationDto> {
+    createEducation(createEducationDto: AddDoctorsEducationDto): Observable<AddDoctorsEducationDto> {
         return this.doctorClient
             .send('create_education', createEducationDto)
             .pipe(
@@ -23,7 +22,7 @@ export class EducationService implements EducationServiceInterface {
             );
     }
 
-    updateEducation(id: string, updateEducationDto: UpdateDoctorsEducationDto): Observable<ResponseInterface | AddDoctorsEducationDto> {
+    updateEducation(id: string, updateEducationDto: UpdateDoctorsEducationDto): Observable<AddDoctorsEducationDto> {
         return this.doctorClient
             .send('update_education', {id: Number(id), data: updateEducationDto})
             .pipe(
@@ -41,7 +40,7 @@ export class EducationService implements EducationServiceInterface {
             );
     }
 
-    deleteEducationById(id: string): Observable<ResponseInterface | AddDoctorsEducationDto> {
+    deleteEducationById(id: string): Observable<AddDoctorsEducationDto> {
         return this.doctorClient
             .send('delete_education_by_id', Number(id))
             .pipe(

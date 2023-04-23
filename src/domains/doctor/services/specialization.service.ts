@@ -2,7 +2,6 @@ import {Inject, Injectable} from "@nestjs/common";
 import {SpecializationServiceInterface} from "../interfaces";
 import {CreateSpecializationDto, UpdateSpecializationDto} from "../dto";
 import {catchError, map, Observable, of} from "rxjs";
-import {ResponseInterface} from "../../../core/error/response.interface";
 import {constants} from "../../../core/constants";
 import {ClientProxy} from "@nestjs/microservices";
 
@@ -14,7 +13,7 @@ export class SpecializationService implements SpecializationServiceInterface {
     ) {
     }
 
-    createSpecialization(createSpecializationDto: CreateSpecializationDto): Observable<ResponseInterface | CreateSpecializationDto> {
+    createSpecialization(createSpecializationDto: CreateSpecializationDto): Observable<CreateSpecializationDto> {
         return this.doctorClient
             .send('create_specialization', createSpecializationDto)
             .pipe(
@@ -23,7 +22,7 @@ export class SpecializationService implements SpecializationServiceInterface {
             );
     }
 
-    updateSpecialization(id: string, updateSpecializationDto: UpdateSpecializationDto): Observable<ResponseInterface | CreateSpecializationDto> {
+    updateSpecialization(id: string, updateSpecializationDto: UpdateSpecializationDto): Observable<CreateSpecializationDto> {
         return this.doctorClient
             .send('update_specialization', {id: Number(id), data: updateSpecializationDto})
             .pipe(
@@ -32,7 +31,7 @@ export class SpecializationService implements SpecializationServiceInterface {
             );
     }
 
-    getSpecializationById(id: string): Observable<ResponseInterface | CreateSpecializationDto> {
+    getSpecializationById(id: string): Observable<CreateSpecializationDto> {
         return this.doctorClient
             .send('get_specialization_by_id', Number(id))
             .pipe(
@@ -50,7 +49,7 @@ export class SpecializationService implements SpecializationServiceInterface {
             );
     }
 
-    deleteSpecializationById(id: string): Observable<ResponseInterface | CreateSpecializationDto> {
+    deleteSpecializationById(id: string): Observable<CreateSpecializationDto> {
         return this.doctorClient
             .send('delete_specialization_by_id', Number(id))
             .pipe(

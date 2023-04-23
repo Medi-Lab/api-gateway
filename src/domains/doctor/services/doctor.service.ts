@@ -4,7 +4,6 @@ import {DoctorServiceInterface} from "../interfaces";
 import {constants} from "../../../core/constants";
 import {ClientProxy} from "@nestjs/microservices";
 import {catchError, map, Observable, of} from "rxjs";
-import {ResponseInterface} from "../../../core/error/response.interface";
 
 @Injectable()
 export class DoctorService implements DoctorServiceInterface {
@@ -14,7 +13,7 @@ export class DoctorService implements DoctorServiceInterface {
     ) {
     }
 
-    createDoctor(createDoctorDto: CreateDoctorDto): Observable<ResponseInterface | CreateDoctorDto> {
+    createDoctor(createDoctorDto: CreateDoctorDto): Observable<CreateDoctorDto> {
         return this.doctorClient
             .send('create_doctor', createDoctorDto)
             .pipe(
@@ -23,7 +22,7 @@ export class DoctorService implements DoctorServiceInterface {
             );
     }
 
-    updateDoctor(id: string, updateDoctorDto: UpdateDoctorDto): Observable<ResponseInterface | CreateDoctorDto> {
+    updateDoctor(id: string, updateDoctorDto: UpdateDoctorDto): Observable<CreateDoctorDto> {
         return this.doctorClient
             .send('update_doctor', {id: Number(id), data: updateDoctorDto})
             .pipe(
@@ -32,7 +31,7 @@ export class DoctorService implements DoctorServiceInterface {
             );
     }
 
-    getDoctorById(id: string): Observable<ResponseInterface | CreateDoctorDto> {
+    getDoctorById(id: string): Observable<CreateDoctorDto> {
         return this.doctorClient
             .send('get_doctor_by_id', Number(id))
             .pipe(
@@ -59,7 +58,7 @@ export class DoctorService implements DoctorServiceInterface {
             );
     }
 
-    deleteDoctorById(id: string): Observable<ResponseInterface | CreateDoctorDto> {
+    deleteDoctorById(id: string): Observable<CreateDoctorDto> {
         return this.doctorClient
             .send('delete_doctor_by_id', Number(id))
             .pipe(

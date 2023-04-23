@@ -1,15 +1,19 @@
 import {CreateSpecializationDto, UpdateSpecializationDto} from "../dto";
 import {Observable} from "rxjs";
-import {ResponseInterface} from "../../../core/error/response.interface";
 
 export interface SpecializationServiceInterface {
-    createSpecialization(createSpecializationDto: CreateSpecializationDto): Observable<ResponseInterface | CreateSpecializationDto>;
+    createSpecialization(
+        createSpecializationDto: CreateSpecializationDto
+    ): Observable<CreateSpecializationDto>;
 
-    updateSpecialization(id: string, updateSpecializationDto: UpdateSpecializationDto): Observable<ResponseInterface | CreateSpecializationDto>;
+    updateSpecialization(
+        id: string,
+        updateSpecializationDto: UpdateSpecializationDto
+    ): Observable<CreateSpecializationDto>;
 
-    getSpecializationById(id: string): Observable<ResponseInterface | CreateSpecializationDto>;
+    getSpecializationById(id: string): Observable<CreateSpecializationDto>;
 
     getSpecializations(query): Observable<CreateSpecializationDto[]>;
 
-    deleteSpecializationById(id: string): Observable<ResponseInterface | CreateSpecializationDto>;
+    deleteSpecializationById(id: string): Observable<CreateSpecializationDto>;
 }

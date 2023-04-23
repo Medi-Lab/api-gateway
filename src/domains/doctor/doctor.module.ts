@@ -1,8 +1,8 @@
 import {Module} from '@nestjs/common';
 import {
-    ClinicController,
     ConsultationController,
     DoctorController,
+    DoctorToClinicController,
     EducationController,
     JobController,
     PositionController,
@@ -49,7 +49,7 @@ import {ClientsModule, Transport} from "@nestjs/microservices";
         ConsultationController,
         RateController,
         SpecializationController,
-        ClinicController,
+        DoctorToClinicController,
         EducationController,
         JobController,
         PositionController,

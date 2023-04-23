@@ -4,7 +4,6 @@ import {ConsultationServiceInterface} from "../interfaces";
 import {constants} from "../../../core/constants";
 import {ClientProxy} from "@nestjs/microservices";
 import {catchError, map, Observable, of} from "rxjs";
-import {ResponseInterface} from "../../../core/error/response.interface";
 
 @Injectable()
 export class ConsultationService implements ConsultationServiceInterface {
@@ -14,7 +13,9 @@ export class ConsultationService implements ConsultationServiceInterface {
     ) {
     }
 
-    createConsultation(createConsultationDto: CreateConsultationDto): Observable<ResponseInterface | CreateConsultationDto> {
+    createConsultation(
+        createConsultationDto: CreateConsultationDto
+    ): Observable<CreateConsultationDto> {
         return this.doctorClient
             .send('create_consultation', createConsultationDto)
             .pipe(
@@ -23,7 +24,10 @@ export class ConsultationService implements ConsultationServiceInterface {
             );
     }
 
-    updateConsultation(id: string, updateConsultationDto: UpdateConsultationDto): Observable<ResponseInterface | CreateConsultationDto> {
+    updateConsultation(
+        id: string,
+        updateConsultationDto: UpdateConsultationDto
+    ): Observable<CreateConsultationDto> {
         return this.doctorClient
             .send('update_consultation', {id: Number(id), data: updateConsultationDto})
             .pipe(
@@ -32,7 +36,7 @@ export class ConsultationService implements ConsultationServiceInterface {
             );
     }
 
-    getDoctorsConsultationsById(id: string): Observable<ResponseInterface | CreateConsultationDto> {
+    getDoctorsConsultationsById(id: string): Observable<CreateConsultationDto> {
         return this.doctorClient
             .send('get_doctors_consultations_by_id', Number(id))
             .pipe(
@@ -50,7 +54,7 @@ export class ConsultationService implements ConsultationServiceInterface {
             );
     }
 
-    deleteConsultationById(id: string): Observable<ResponseInterface | CreateConsultationDto> {
+    deleteConsultationById(id: string): Observable<CreateConsultationDto> {
         return this.doctorClient
             .send('delete_consultation_by_id', Number(id))
             .pipe(

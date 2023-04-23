@@ -14,8 +14,8 @@ import {CreateClinicDto} from "../../clinic/dto";
 import {ClinicServiceInterface} from "../interfaces";
 
 @ApiTags('Додати лікарів до клініки')
-@Controller('add-doctor-to-clinic')
-export class ClinicController {
+@Controller('add-doctor-to-clinic-to-doctor')
+export class DoctorToClinicController {
     constructor(
         @Inject(constants.tokens.ADD_DOCTOR_TO_CLINIC_SERVICE_TOKEN)
         private readonly clinicService: ClinicServiceInterface
@@ -29,7 +29,7 @@ export class ClinicController {
         return this.clinicService.addDoctorToClinic(addDoctorToClinicDto);
     }
 
-    @ApiOperation({summary: 'Змінити клінку лікаря'})
+    @ApiOperation({summary: 'Змінити клініку лікаря'})
     @ApiResponse({status: 200})
     @Patch()
     changeDoctorsClinicConnection(
@@ -48,7 +48,7 @@ export class ClinicController {
 
     @ApiOperation({summary: 'Отримати лікарів які працюють в клініці за id клініки'})
     @ApiResponse({status: 200})
-    @Get('clinic/:id')
+    @Get('clinic-to-doctor/:id')
     getDoctorsWhichWorkOnTheClinic(@Param() {id}: DefaultParam): Observable<CreateDoctorDto[]> {
         return this.clinicService.getDoctorsWhichWorkOnTheClinic(id);
     }

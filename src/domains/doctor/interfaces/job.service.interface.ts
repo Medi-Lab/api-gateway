@@ -1,13 +1,12 @@
 import {CreateJobDto, UpdateJobDto} from "../dto";
 import {Observable} from "rxjs";
-import {ResponseInterface} from "../../../core/error/response.interface";
 
 export interface JobServiceInterface {
-    createJob(createJobDto: CreateJobDto): Observable<ResponseInterface | CreateJobDto>;
+    createJob(createJobDto: CreateJobDto): Observable<CreateJobDto>;
 
-    updateJob(id: string, updateJobDto: UpdateJobDto): Observable<ResponseInterface | CreateJobDto>;
+    updateJob(id: string, updateJobDto: UpdateJobDto): Observable<CreateJobDto>;
 
     getDoctorsJobs(doctorId: string): Observable<CreateJobDto[]>;
 
-    deleteJobById(id: string): Observable<ResponseInterface | CreateJobDto>;
+    deleteJobById(id: string): Observable<CreateJobDto>;
 }
