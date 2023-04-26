@@ -12,7 +12,7 @@ import {ClientsModule, Transport} from "@nestjs/microservices";
                 name: constants.microservices_names.clinic,
                 transport: Transport.RMQ,
                 options: {
-                    urls: ['amqp://rabbitmq:5672'],
+                    urls: ['amqp://localhost:5672'],
                     queue: constants.microservices_queues.clinic,
                     queueOptions: {
                         durable: true

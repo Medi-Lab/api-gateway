@@ -1,13 +1,12 @@
 import {CreateResponseDto, UpdateResponseDto} from "../dto";
+import {Observable} from "rxjs";
 
 export interface ResponseServiceInterface {
-    createResponse(createResponseDto: CreateResponseDto);
+    createResponse(createResponseDto: CreateResponseDto): Observable<CreateResponseDto>;
 
-    updateResponse(id: string, updateResponseDto: UpdateResponseDto);
+    updateResponse(id: string, updateResponseDto: UpdateResponseDto): Observable<CreateResponseDto>;
 
-    getResponseById(id: string);
+    getResponses(query): Observable<CreateResponseDto[]>;
 
-    getResponses();
-
-    deleteResponseById(id: string);
+    deleteResponseById(id: string): Observable<CreateResponseDto>;
 }

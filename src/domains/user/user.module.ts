@@ -16,7 +16,7 @@ import {UsersRoleController} from "./controllers/users-role.controller";
                 name: constants.microservices_names.user,
                 transport: Transport.RMQ,
                 options: {
-                    urls: ['amqp://rabbitmq:5672'],
+                    urls: ['amqp://localhost:5672'],
                     queue: constants.microservices_queues.user,
                     queueOptions: {
                         durable: true

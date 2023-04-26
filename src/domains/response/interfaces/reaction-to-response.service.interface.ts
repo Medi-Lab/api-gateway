@@ -1,8 +1,7 @@
+import {Observable} from "rxjs";
+import {ResponseInterface} from "../../../core/error/response.interface";
 import {ReactionToResponseDto} from "../dto";
 
 export interface ReactionToResponseServiceInterface {
-    likeResponse(reactionToResponseDto: ReactionToResponseDto);
-
-    dislikeResponse(reactionToResponseDto: ReactionToResponseDto);
-    
+    reactionToResponse(reactionToResponseDto: ReactionToResponseDto): Observable<ResponseInterface>;
 }

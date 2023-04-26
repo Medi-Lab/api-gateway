@@ -1,13 +1,14 @@
 import {CreateRecordDto, UpdateRecordDto} from "../dto";
+import {Observable} from "rxjs";
 
 export interface RecordServiceInterface {
-    createRecord(createRecordDto: CreateRecordDto);
+    createRecord(createRecordDto: CreateRecordDto): Observable<CreateRecordDto>;
 
-    updateRecord(id: string, updateRecordDto: UpdateRecordDto);
+    updateRecord(id: string, updateRecordDto: UpdateRecordDto): Observable<CreateRecordDto>;
 
-    getRecords();
+    getRecordById(id: string): Observable<CreateRecordDto>;
 
-    getRecordById(id: string);
+    getRecords(query): Observable<CreateRecordDto[]>;
 
-    deleteRecordById(id: string);
+    deleteRecordById(id: string): Observable<CreateRecordDto>;
 }

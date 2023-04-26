@@ -14,7 +14,7 @@ import {CreateClinicDto} from "../../clinic/dto";
 import {ClinicServiceInterface} from "../interfaces";
 
 @ApiTags('Додати лікарів до клініки')
-@Controller('add-doctor-to-clinic-to-doctor')
+@Controller('add-doctor-to-clinic')
 export class DoctorToClinicController {
     constructor(
         @Inject(constants.tokens.ADD_DOCTOR_TO_CLINIC_SERVICE_TOKEN)
@@ -48,7 +48,7 @@ export class DoctorToClinicController {
 
     @ApiOperation({summary: 'Отримати лікарів які працюють в клініці за id клініки'})
     @ApiResponse({status: 200})
-    @Get('clinic-to-doctor/:id')
+    @Get('clinic/:id')
     getDoctorsWhichWorkOnTheClinic(@Param() {id}: DefaultParam): Observable<CreateDoctorDto[]> {
         return this.clinicService.getDoctorsWhichWorkOnTheClinic(id);
     }

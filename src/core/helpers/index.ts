@@ -6,7 +6,7 @@ export function registerMicroservices(microservicesNames: string[]): ClientsModu
         name: constants.microservices_names[microservicesName],
         transport: Transport.RMQ,
         options: {
-            urls: ['amqp://rabbitmq:5672'],
+            urls: ['amqp://localhost:5672'],
             queue: constants.microservices_queues[microservicesName],
             queueOptions: {
                 durable: true
